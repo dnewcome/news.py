@@ -1,0 +1,11 @@
+{# note: jinja does a much nicer job with recursive templates #}
+<ul>
+	{% for p in posts %}
+		<li>{{ p.title }}</li>
+		{% if p.children %}
+			{%with posts=p.children template_name="_post.html" %}
+				{%include template_name%}
+			{%endwith%}
+		{% endif %}
+	{% endfor %}
+</ul>
